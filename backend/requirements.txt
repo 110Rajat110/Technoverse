@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pymongo
+langchain
+langchain-google-genai
+python-dotenv
+scikit-learn
+pandas

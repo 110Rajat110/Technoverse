@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#000000] text-[#ededed] antialiased m-0 p-0;
+    font-family: 'Inter', -apple-system, sans-serif;
+  }
+}
+
+.panel {
+  @apply bg-[#0A0A0A] border border-[#222222] rounded-2xl relative overflow-hidden;
+}
+
+.sub-panel {
+  @apply bg-[#111111] border border-[#333333] rounded-xl;
+}
