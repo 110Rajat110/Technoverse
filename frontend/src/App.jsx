@@ -17,7 +17,7 @@ export default function App() {
   const [sim, setSim] = useState(null);
 
   const fetchTelemetry = async () => {
-    const res = await fetch('http://localhost:8000/api/telemetry');
+    const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/telemetry`);
     const data = await res.json();
     setTelemetry(data);
   };
@@ -29,37 +29,37 @@ export default function App() {
   }, []);
 
   const resetDemo = async () => {
-    await fetch('http://localhost:8000/api/demo/heal', { method: 'POST' });
+    await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/demo/heal`, { method: 'POST' });
     setStep(0);
     setRca(null); setSim(null);
     fetchTelemetry();
   };
 
   const handlePredict = async () => {
-    await fetch('http://localhost:8000/api/demo/predict', { method: 'POST' });
+    await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/demo/predict`, { method: 'POST' });
     setStep(1); fetchTelemetry();
   };
 
   const handleFail = async () => {
-    await fetch('http://localhost:8000/api/demo/fail', { method: 'POST' });
+    await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/demo/fail`, { method: 'POST' });
     setStep(2); fetchTelemetry();
   };
 
   const handleRca = async () => {
     setStep(3);
-    const res = await fetch('http://localhost:8000/api/demo/rca');
+    const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/demo/rca`);
     const data = await res.json();
     setRca(data.rca);
   };
 
   const handleFix = async () => {
     setStep(4);
-    const simRes = await fetch('http://localhost:8000/api/demo/simulate');
+    const simRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/demo/simulate`);
     setSim(await simRes.json());
     
     // Simulate thinking/fixing time
     setTimeout(async () => {
-       await fetch('http://localhost:8000/api/demo/heal', { method: 'POST' });
+       await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/demo/heal`, { method: 'POST' });
        fetchTelemetry();
        setStep(5);
     }, 2500);
